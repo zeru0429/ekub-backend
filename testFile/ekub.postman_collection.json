@@ -1,0 +1,1910 @@
+{
+	"info": {
+		"_postman_id": "c0a45ad3-a461-4407-aaac-2cecb190e811",
+		"name": "ekub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31991947"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"senasifan@yahoo.com\",\r\n  \"password\": \"securepassword\",\r\n  \"firstName\": \"sena\",\r\n  \"middleName\": \"kebede\",\r\n  \"lastName\": \"geneti\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"senakebed@yahoo.com\",\r\n  \"password\": \"securepassword\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/user/get/:3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"get",
+								":3"
+							],
+							"variable": [
+								{
+									"key": "3",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/user/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deactivate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/user/deactivate/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"deactivate",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZmlyc3ROYW1lIjoiQWJlYmUiLCJyb2xlIjoiVVNFUiIsImlhdCI6MTcxNzI5NDI2Nn0.l6rbMHdq2IUmSJE2Xp7CQC48SPzLAeAQVj_5UIFKBTQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"oldPassword\": \"securepassword\",\r\n     \"newPassword\": \"securepassword123\"\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/user/change/Password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"change",
+								"Password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{  \"firstName\" : \"seni\",\r\n  \"middleName\": \"kebede\",\r\n  \"lastName\": \"geneti\",\r\n    \"gender\": \"FEMALE\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/user/updateProfile/:3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"updateProfile",
+								":3"
+							],
+							"variable": [
+								{
+									"key": "3",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAddress",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city\": \"Addis Ababa\",\r\n  \"street\": \"Bole\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/user/updateAddress/:3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"user",
+								"updateAddress",
+								":3"
+							],
+							"variable": [
+								{
+									"key": "3",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Category 1\",\r\n  \"amount\": 200,\r\n  \"commition\": 2,\r\n  \"totalCount\": 5,\r\n  \"duration\":\" 5 months\",\r\n  \"collectionCycle\": \"1 month\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/category/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"category",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCategory",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Category 2\",\r\n  \"amount\": 100,\r\n  \"commition\": 3,\r\n  \"totalCount\": 5,\r\n  \"duration\":\" 5 months\",\r\n  \"collectionCycle\": \"1 month\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/category/update/:2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"category",
+								"update",
+								":2"
+							],
+							"variable": [
+								{
+									"key": "2",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/category/getCategory/:2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"category",
+								"getCategory",
+								":2"
+							],
+							"variable": [
+								{
+									"key": "2",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/category/getAllCategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"category",
+								"getAllCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/category/delete/:3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"category",
+								"delete",
+								":3"
+							],
+							"variable": [
+								{
+									"key": "3",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lot",
+			"item": [
+				{
+					"name": "registerLot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzE3NTA5MzQwfQ.Ine6ryYXWc6V5HUPpA_4HUMv64vLwFjHjlkammhw9Q8"
+							},
+							{
+								"key": "",
+								"value": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"categoryId\": 1,\r\n  \"firstName\": \"sifen\",\r\n  \"middleName\": \"kebede\",\r\n  \"lastName\": \"Geneti\",\r\n  \"gender\": \"MALE\",\r\n  \"city\": \"New York\",\r\n  \"street\": \"123 Main St\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/lot/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/lot/getLotAll/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"getLotAll",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/lot/getLot/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"getLot",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLotwithCategory",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/lot/getLot/Category/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"getLot",
+								"Category",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProfile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/lot/getLotProfile/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"getLotProfile",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProfile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Jane\",\r\n  \"middleName\": \"A.\",\r\n  \"lastName\": \"Doe\",\r\n  \"city\": \"Los Angeles\",\r\n  \"street\": \"456 Elm St\",\r\n  \"gender\": \"FEMALE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/lot/updateProfile/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"updateProfile",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLot",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/lot/deleteLot/:2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"lot",
+								"deleteLot",
+								":2"
+							],
+							"variable": [
+								{
+									"key": "2",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deposit",
+			"item": [
+				{
+					"name": "statistics",
+					"item": [
+						{
+							"name": "Deposit",
+							"item": [
+								{
+									"name": "deposit&totalSpecifyingTheWeek",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/year/2024/week/24",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"year",
+												"2024",
+												"week",
+												"24"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "TotalDepositInSpecifiedYearAndMonth",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/year/month/total/2024?month=6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"year",
+												"month",
+												"total",
+												"2024"
+											],
+											"query": [
+												{
+													"key": "month",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "depositWithinSpecifiedYear",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/year/month/2024",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"year",
+												"month",
+												"2024"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "remaining",
+							"item": [
+								{
+									"name": "getReminingForSpecifiedYearMonthAndWeek",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+											}
+										],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/remaining/?year=2024&month=6&week=24",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"remaining",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "month",
+													"value": "6"
+												},
+												{
+													"key": "week",
+													"value": "24"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "remaining In Specified Year",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/remaining/?year=2024",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"remaining",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "remaining In a Month Specified",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "authorization",
+												"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzc2MTUzN30.HtzGZ2S1FWhIyiAdCtzIhKG6UKPqx3TPCtL7_w1EAU0"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/remaining/?year=2024&month=6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"remaining",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "month",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "commission",
+							"item": [
+								{
+									"name": "getCommissionOfTheSpecifiedWeek",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/commission/?year=2024&week=23",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"commission",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "week",
+													"value": "23"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getCommissionOfSpecifiedMonth",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/commission/?year=2024&month=6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"commission",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "month",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getCommissionOfSpecifiedYear",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/commission/?year=2024",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"commission",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "deposit but additional",
+							"item": [
+								{
+									"name": "depositOfToday",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/day",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"day"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "depositsofThisWeek",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/week/day",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"week",
+												"day"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "depositsWithinThisMonth",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/month/day",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"month",
+												"day"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "BdepositForSpecifiedYearMonthWeekWithTotalDeposit",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/period/deposit/?year=2024&month=6&week=23",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"period",
+												"deposit",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "month",
+													"value": "6"
+												},
+												{
+													"key": "week",
+													"value": "23"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "BforSpecifiedPeriodYearMonthWeek",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/period/?year=2024&month=6&week=5",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"period",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "month",
+													"value": "6"
+												},
+												{
+													"key": "week",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "remaining but Additional",
+							"item": [
+								{
+									"name": "getTotalRemainingInspecifiedMonth",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/remaining/?year=2024&month=6",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"remaining",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "month",
+													"value": "6"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getTotalRemainingInspecifiedYearAndWeek",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:7777/api/deposit/remaining/?year=2024&week=23",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "7777",
+											"path": [
+												"api",
+												"deposit",
+												"remaining",
+												""
+											],
+											"query": [
+												{
+													"key": "year",
+													"value": "2024"
+												},
+												{
+													"key": "week",
+													"value": "23"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "registerDeposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lotId\": 2,\r\n  \"amount\": 10,\r\n  \"commition\": 2\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleDeposit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/get/:9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"get",
+								":9"
+							],
+							"variable": [
+								{
+									"key": "9",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllDeposit",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDeposit",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "aaeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/delete/:10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"delete",
+								":10"
+							],
+							"variable": [
+								{
+									"key": "10",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDeposit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzE3NjU4NzcyfQ.wZlrtf7-4FkBykg4OHHqdpRSW0MVNCu0vtvR8dzWhlY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 300,\r\n  \"commition\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/update/:11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"update",
+								":11"
+							],
+							"variable": [
+								{
+									"key": "11",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IdepositInSpecifiedYearandMonth",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/year/month/by?year=2023&month=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"year",
+								"month",
+								"by"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2023"
+								},
+								{
+									"key": "month",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "I",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/deposit/remaining/total?year=2024",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"deposit",
+								"remaining",
+								"total"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2024"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "loan",
+			"item": [
+				{
+					"name": "registerLoan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"lotId\": 1,\r\n  \"amount\": 100,\r\n  \"count\": 3\r\n  \r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/loan/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"loan",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLoan",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"amount\": 2\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/loan/update/:9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"loan",
+								"update",
+								":9"
+							],
+							"variable": [
+								{
+									"key": "9",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteLoan",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7777/api/loan/delete/:13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"loan",
+								"delete",
+								":13"
+							],
+							"variable": [
+								{
+									"key": "13",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleLoan",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/loan/get/:4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"loan",
+								"get",
+								":4"
+							],
+							"variable": [
+								{
+									"key": "4",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllLoans",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/loan/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"loan",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateLoanStatus",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/winner/updateStatus/:2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"winner",
+								"updateStatus",
+								":2"
+							],
+							"variable": [
+								{
+									"key": "2",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Winner",
+			"item": [
+				{
+					"name": "updateWinner",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzE3NjU4NzcyfQ.wZlrtf7-4FkBykg4OHHqdpRSW0MVNCu0vtvR8dzWhlY"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lotId\": 2,\r\n   \"count\": 4\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/winner/update/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"winner",
+								"update",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registerWinner",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzc0NjU2OH0.4JckKWC6tiXjvxmONrERoTEVSSoGzZWEusz1sRJ72B0"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"lotId\": 2,\r\n  \"count\" : 4\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/winner/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"winner",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteWinner",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7777/api/winner/delete/:11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"winner",
+								"delete",
+								":11"
+							],
+							"variable": [
+								{
+									"key": "11",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleWinner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/winner/get/:1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"winner",
+								"get",
+								":1"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllWinner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7777/api/winner/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"winner",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "remainingPayment",
+			"item": [
+				{
+					"name": "registerRemaining",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n \"commissionPaid\": 1,\r\n  \"depositId\": 11\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/remaining/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"remaining",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7777/api/remaining/delete/:23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"remaining",
+								"delete",
+								":23"
+							],
+							"variable": [
+								{
+									"key": "23",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateRemainig",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"amountPaid\": 20,\r\n \"commissionPaid\": 2\r\n\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7777/api/remaining/update/:23",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"remaining",
+								"update",
+								":23"
+							],
+							"variable": [
+								{
+									"key": "23",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getSingleRemaining",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZmlyc3ROYW1lIjoic2VuYSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTcxNzg5NDE3OX0.xj5-0r9I_Z0pP0QwRxFaNAGD2VK8hYFdeh6nNohjnkE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7777/api/remaining/get/:31",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7777",
+							"path": [
+								"api",
+								"remaining",
+								"get",
+								":31"
+							],
+							"variable": [
+								{
+									"key": "31",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,153 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+ enum ROLE {
+  ADMIN
+  USER
+}
+
+enum STATUS{
+  ACTIVE
+  DEACTIVATED
+  PENDING
+}
+
+enum GENDER {
+  MALE
+  FEMALE
+}
+
+model Users {
+    id        Int      @id @default(autoincrement())
+    email     String   @unique
+    password  String
+    role      ROLE     @default(USER)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    firstName String 
+    middleName String 
+    lastName  String 
+    activeStatus STATUS
+    returnedRemaining remainingPayement[]
+    Profiles    Profiles[]
+    loans     Loans[]
+    deposits  Deposits[]
+    lots      Lots[]
+  }
+  
+  model Category {
+    id           Int      @id @default(autoincrement())
+    name         String
+    amount       Decimal
+    commition    Decimal
+    createdAt    DateTime  @default(now())
+    totalCount   Int
+    totalAmount  Decimal
+    totalCommition Decimal
+    collectionCycle String 
+    duration  String 
+    lot          Lots[]
+  }
+  // model Rounds {
+  //   id Int @id @default(autoincrement())
+  //   deposit    Deposits[]
+  //   loan        Loans[]
+  //   winner      Winners[]
+  // }
+  model Lots {
+    id            Int       @id @default(autoincrement())
+    categoryId    Int?
+    registeredBy  Int
+    isCompleted   Boolean
+    createdAt     DateTime  @default(now())
+    remainingDay    Int 
+    remainingAmount Decimal 
+    cumulativePayment Decimal @default(0)
+    user          Users      @relation(fields: [registeredBy], references: [id] ,onDelete: Cascade)
+    category      Category?  @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+    profile       Profiles?
+    loans         Loans[]
+    deposits      Deposits[]
+    returnedRemaining remainingPayement[]
+    winners       Winners[]
+  }
+  
+  model Profiles {
+    id         Int       @id @default(autoincrement())
+    lotId      Int       @unique
+    userId     Int       
+    firstName  String
+    middleName String
+    lastName   String
+    gender     GENDER
+    city       String
+    street     String
+    createdAt  DateTime  @default(now())
+    user       Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    lot        Lots      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  }
+  
+  model Deposits {
+    id        Int       @id @default(autoincrement())
+    // roundId      Int
+    lotId     Int
+    userId    Int
+    count      Int
+    amount    Decimal
+    commition Decimal
+    remainingAmountPerDeposit Decimal  
+    remainingCommissionPerDeposit Decimal 
+    createdAt DateTime  @default(now())
+  //  round Rounds @relation(fields: [roundId], references:[id], onDelete: Cascade) 
+    user      Users      @relation(fields: [userId], references: [id] ,onDelete: Cascade )
+    lot       Lots       @relation(fields: [lotId], references: [id] ,onDelete: Cascade )
+    remainingPayment   remainingPayement[]
+  }
+  
+  model Loans {
+    id        Int       @id @default(autoincrement())
+    lotId     Int
+    userId    Int
+    amount    Decimal
+    // count    Int 
+    createdAt DateTime  @default(now())               
+  //  isPaidBack  Boolean @default(false) 
+  
+    lot       Lots       @relation(fields: [lotId], references: [id] ,onDelete: Cascade )
+    user      Users      @relation(fields: [userId], references: [id] ,onDelete: Cascade )
+  }
+  
+  model Winners {
+    id           Int       @id @default(autoincrement())
+    lotId        Int       
+    // count        Int
+    registeredBy Int
+    createdAt    DateTime  @default(now())
+    // round Rounds    @relation(fields: [roundId], references: [id], onDelete: Cascade)
+    lot          Lots       @relation(fields: [lotId], references: [id] ,onDelete: Cascade )
+  }
+  
+  model remainingPayement {
+    id           Int       @id @default(autoincrement())
+    userId       Int
+    lotId        Int
+    depositId    Int 
+    amountPaid   Decimal? 
+    commissionPaid Decimal? 
+    paymentDate  DateTime  @default(now())
+    deposit Deposits @relation(fields: [depositId], references: [id], onDelete: Cascade)
+    user       Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    lot          Lots      @relation(fields: [lotId], references: [id], onDelete: Cascade)
+  }
+  
