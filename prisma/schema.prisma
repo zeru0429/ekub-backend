@@ -59,12 +59,6 @@ model Users {
     duration  String 
     lot          Lots[]
   }
-  // model Rounds {
-  //   id Int @id @default(autoincrement())
-  //   deposit    Deposits[]
-  //   loan        Loans[]
-  //   winner      Winners[]
-  // }
   model Lots {
     id            Int       @id @default(autoincrement())
     categoryId    Int?
