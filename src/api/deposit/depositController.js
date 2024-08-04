@@ -267,7 +267,12 @@ const depositController = {
   },
   getAllDeposits: async (req, res, next) => {
     try {
+      const skip = req.query.skip ? parseInt(req.query.skip, 10) : 0;
+      const take = req.query.take ? parseInt(req.query.take, 10) : 10;
+      console.log(`${skip} -- ${take}`);
       const deposits = await prisma.deposits.findMany({
+        skip: skip,
+        take: take,
         include: {
           lot: true, // Include related lot information
         },

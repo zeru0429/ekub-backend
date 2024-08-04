@@ -6,7 +6,7 @@ import { isAdmin, isAuthUser, isUser } from "../../middlewares/auth.js";
 router.post("/register", depositController.register);
 router.put("/update/:id", depositController.update);
 router.get("/get/:id", depositController.getSingleDeposit);
-router.get("/get", depositController.getAllDeposits);
+router.get("/getAll", depositController.getAllDeposits);
 
 //get deposit of today, current month , current year
 router.get("/day", depositController.getDepositsWithinDay); // deposit of the current day
