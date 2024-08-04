@@ -165,17 +165,6 @@ const categoryController = {
       const categories = await prisma.category.findMany({
         include: {
           _count: true,
-          lot: {
-            include: {
-              _count: true,
-              category: true,
-              profile: true,
-              deposits: true,
-              returnedRemaining: true,
-              loans: true,
-              winners: true,
-            },
-          },
         },
       }); // Fetch all categories
 
