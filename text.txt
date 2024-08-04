@@ -1,0 +1,29 @@
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+# DATABASE_URL="mysql://root:1234@localhost:3306/ekub?schema=public"
+
+DATABASE_URL="mysql://huludeig_common:OpenAi@2023@176.58.119.63:3306/huludeig_common?schema=public"
+
+
+HOST=localhost
+PORT=6532
+SECRET='tsehaymemartiwedalesh'
+EMAIL= ""
+EMAIL_PASSWORD= ""
+
+# cloudlinux-selector install-modules --json --interpreter nodejs --user huludeig --app-root test.huludelala.com
+
+# cloudlinux-selector install-modules --json --interpreter nodejs --user yourusername --app-root yoursubdomainfolder
+
+# source  /home/yourusername/nodevenv/yoursubdomainfolder/14/bin/activate && cd /home/yourusername/yoursubdomainfolder
+# source /home/huludeig/nodevenv/test.huludelala.com/14/bin/activate && cd /home/huludeig/test.huludelala.com
+# source  /home/yourusername/nodevenv/yoursubdomainfolder/14/bin/activate && cd /home/yourusername/yoursubdomainfolder
+
+# /usr/bin/flock -n /tmp/mylockenv.lock ${HOME}/nodevenv/test.huludelala.com/14/bin/node ${HOME} test.huludelala.com/app.js>/dev/null 2>&1
+
+# ps faux
+# kill PID

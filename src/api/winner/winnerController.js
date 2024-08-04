@@ -1,23 +1,21 @@
 import { prisma } from "../../config/prisma.js";
-import  winnerSchema  from "./winnerSchema.js";
-
+import winnerSchema from "./winnerSchema.js";
 
 const winnerController = {
   register: async (req, res, next) => {
-    
-  try {
-    // Check if any required field is missing
-    const requiredFields = ["lotId"];
-    for (const field of requiredFields) {
-      if (!req.body[field]) {
-        return res.status(403).json({
-          success: false,
-          message: `${field} is required`,
-        });
+    try {
+      // Check if any required field is missing
+      const requiredFields = ["lotId"];
+      for (const field of requiredFields) {
+        if (!req.body[field]) {
+          return res.status(403).json({
+            success: false,
+            message: `${field} is required`,
+          });
+        }
       }
-    }
 
-    const data = winnerSchema.register.parse(req.body);
+      const data = winnerSchema.register.parse(req.body);
 
       const lot = await prisma.lots.findUnique({
         where: { id: data.lotId },
@@ -29,9 +27,7 @@ const winnerController = {
           message: "Lot not found",
         });
       }
-     
-  
-      
+
       // Check if the winner is already registered
       const existingWinner = await prisma.winners.findFirst({
         where: {
@@ -45,21 +41,16 @@ const winnerController = {
           message: "Winner is already registered",
         });
       }
-        //  const loansOnCount = await prisma.loans.findMany({
-        //   where: {
-        //     count: data.count,
-        //   },
-        // });
-  
-        // const totalLoansOnCount = loansOnCount.reduce((acc, loan) => acc + parseFloat(loan.amount), 0);
-      // Calculate total loans for the lot
       const loans = await prisma.loans.findMany({
         where: {
           lotId: data.lotId,
         },
       });
 
-      const totalLoans = loans.reduce((acc, loan) => acc + parseFloat(loan.amount), 0);
+      const totalLoans = loans.reduce(
+        (acc, loan) => acc + parseFloat(loan.amount),
+        0
+      );
 
       // Fetch the category associated with the lot
       const category = await prisma.category.findUnique({
@@ -76,7 +67,7 @@ const winnerController = {
       }
 
       // Calculate the prize amount
-      const prizeAmount = parseFloat(category.totalAmount) - totalLoans ;
+      const prizeAmount = parseFloat(category.totalAmount) - totalLoans;
 
       // Register the winner
       const newWinner = await prisma.winners.create({
@@ -100,13 +91,12 @@ const winnerController = {
   },
   update: async (req, res, next) => {
     try {
-        const id = parseInt(req.params.id.substring(1));
+      const id = parseInt(req.params.id.substring(1));
       const data = winnerSchema.update.parse(req.body);
 
       const lot = await prisma.lots.findUnique({
         where: { id: data.lotId },
       });
-
 
       // Check if the winner exists
       const isWinnerExist = await prisma.winners.findFirst({
@@ -127,11 +117,11 @@ const winnerController = {
         },
       });
 
-      if(Winner){
-      return res.status(404).json({
-        success : false,
-        message: "Winner is already registered"
-      })
+      if (Winner) {
+        return res.status(404).json({
+          success: false,
+          message: "Winner is already registered",
+        });
       }
 
       // const loansOnCount = await prisma.loans.findMany({
@@ -141,31 +131,34 @@ const winnerController = {
       // });
 
       // const totalLoansOnCount = loansOnCount.reduce((acc, loan) => acc + parseFloat(loan.amount), 0);
-    // Calculate total loans for the lot
-    const loans = await prisma.loans.findMany({
-      where: {
-        lotId: data.lotId || isWinnerExist.lotId,
-      },
-    });
-
-    const totalLoans = loans.reduce((acc, loan) => acc + parseFloat(loan.amount), 0);
-
-    // Fetch the category associated with the lot
-    const category = await prisma.category.findUnique({
-      where: {
-        id: lot.categoryId,
-      },
-    });
-
-    if (!category) {
-      return res.status(404).json({
-        success: false,
-        message: "Category not found",
+      // Calculate total loans for the lot
+      const loans = await prisma.loans.findMany({
+        where: {
+          lotId: data.lotId || isWinnerExist.lotId,
+        },
       });
-    }
 
-    // Calculate the prize amount
-    const prizeAmount = parseFloat(category.totalAmount) - totalLoans ;
+      const totalLoans = loans.reduce(
+        (acc, loan) => acc + parseFloat(loan.amount),
+        0
+      );
+
+      // Fetch the category associated with the lot
+      const category = await prisma.category.findUnique({
+        where: {
+          id: lot.categoryId,
+        },
+      });
+
+      if (!category) {
+        return res.status(404).json({
+          success: false,
+          message: "Category not found",
+        });
+      }
+
+      // Calculate the prize amount
+      const prizeAmount = parseFloat(category.totalAmount) - totalLoans;
 
       const updatedWinner = await prisma.winners.update({
         where: {
@@ -181,51 +174,15 @@ const winnerController = {
       return res.status(200).json({
         success: true,
         message: `Winner has won ${prizeAmount} `,
-        data: updatedWinner
+        data: updatedWinner,
       });
     } catch (error) {
       next(error);
     }
   },
-  // updateLoanStatus : async (req, res, next) => {
-  //   const id = parseInt(req.params.id.substring(1));
-  
-  //   try {
-  //     const existingLoan = await prisma.loans.findUnique({
-  //       where: { id: id },
-  //     });
-  
-  //     if (!existingLoan) {
-  //       return res.status(404).json({
-  //         success: false,
-  //         message: 'Loan not found',
-  //       });
-  //     }
-  
-  //     const updatedLoan = await prisma.loans.update({
-  //       where: { id: parseInt(id) },
-  //       data: {
-  //         isPaidBack: true,
-  //       },
-  //     });
-  
-  //     return res.status(200).json({
-  //       success: true,
-  //       message: 'Loan status updated to paid back',
-  //       data: updatedLoan,
-  //     });
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // },
-
-
-
-  
-
   delete: async (req, res, next) => {
     try {
-        const id = parseInt(req.params.id.substring(1));
+      const id = parseInt(req.params.id.substring(1));
 
       // Check if the winner exists
       const isWinnerExist = await prisma.winners.findFirst({
@@ -249,7 +206,7 @@ const winnerController = {
 
       return res.status(200).json({
         success: true,
-        message: 'Winner deleted successfully',
+        message: "Winner deleted successfully",
       });
     } catch (error) {
       next(error);
@@ -261,7 +218,7 @@ const winnerController = {
       if (isNaN(id)) {
         return res.status(400).json({
           success: false,
-          message: 'Invalid winner ID specified',
+          message: "Invalid winner ID specified",
         });
       }
 
@@ -274,13 +231,13 @@ const winnerController = {
       if (!winner) {
         return res.status(404).json({
           success: false,
-          message: 'Winner not found',
+          message: "Winner not found",
         });
       }
 
       return res.status(200).json({
         success: true,
-        message: 'Winner retrieved successfully',
+        message: "Winner retrieved successfully",
         data: winner,
       });
     } catch (error) {
@@ -293,17 +250,13 @@ const winnerController = {
 
       return res.status(200).json({
         success: true,
-        message: 'All winners retrieved successfully',
+        message: "All winners retrieved successfully",
         data: winners,
       });
     } catch (error) {
       next(error);
     }
   },
-}
-
-
-
-;
+};
 
 export default winnerController;
