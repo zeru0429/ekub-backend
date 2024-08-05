@@ -23,7 +23,7 @@ EMAIL_PASSWORD= ""
 # source /home/huludeig/nodevenv/test.huludelala.com/14/bin/activate && cd /home/huludeig/test.huludelala.com
 # source  /home/yourusername/nodevenv/yoursubdomainfolder/14/bin/activate && cd /home/yourusername/yoursubdomainfolder
 
-# /usr/bin/flock -n /tmp/mylockenv.lock ${HOME}/nodevenv/test.huludelala.com/14/bin/node ${HOME} test.huludelala.com/app.js>/dev/null 2>&1
+# /usr/bin/flock -n /tmp/mylockenv.lock ${HOME}/nodevenv/enat.ekub.huludelala.com//14/bin/node ${HOME} enat.ekub.huludelala.com//app.js>/dev/null 2>&1
 
 # ps faux
 # kill PID

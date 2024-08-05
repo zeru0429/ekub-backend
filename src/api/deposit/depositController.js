@@ -239,7 +239,7 @@ const depositController = {
   },
 
   getSingleDeposit: async (req, res, next) => {
-    const id = parseInt(req.params.id.substring(1));
+    const id = parseInt(req.params.id);
 
     try {
       const deposit = await prisma.deposits.findUnique({
