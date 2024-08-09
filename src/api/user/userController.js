@@ -169,9 +169,14 @@ const userController = {
   },
   getAllUsers: async (req, res, next) => {
     // console.log("Fetching all users");
+    const take = req.query.take || 10;
+    const skip = req.query.skip || 0;
 
     try {
-      const users = await prisma.users.findMany({});
+      const users = await prisma.users.findMany({
+        skip: skip,
+        take: take,
+      });
       return res.status(200).json({
         success: true,
         data: users,

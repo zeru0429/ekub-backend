@@ -207,8 +207,13 @@ const loanController = {
   },
 
   getAllLoans: async (req, res, next) => {
+    const take = req.query.take || 10;
+    const skip = req.query.skip || 0;
+
     try {
       const allLoans = await prisma.loans.findMany({
+        take: +take,
+        skip: +skip,
         include: {
           lot: {
             include: {

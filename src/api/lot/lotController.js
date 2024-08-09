@@ -128,8 +128,13 @@ const lotController = {
     }
   },
   getAllLotosInfo: async (req, res, next) => {
+    const take = req.query.take || 10;
+    const skip = req.query.skip || 0;
+
     try {
       const lot = await prisma.lots.findMany({
+        take: +take,
+        skip: +skip,
         include: {
           category: {
             include: {

@@ -245,8 +245,11 @@ const winnerController = {
     }
   },
   getAllWinners: async (req, res, next) => {
+    const take = req.query.take || 10;
+    const skip = req.query.skip || 0;
+
     try {
-      const winners = await prisma.winners.findMany();
+      const winners = await prisma.winners.findMany({ skip: skip, take: take });
 
       return res.status(200).json({
         success: true,

@@ -2,6 +2,7 @@ import express from "express"; // Assuming you're using Express
 // const { Request, Response, NextFunction } = express; // Destructuring for cleaner syntax
 import categorySchema from "./categorySchema.js";
 import prisma from "../../config/prisma.js";
+import { late } from "zod";
 
 const categoryController = {
   register: async (req, res, next) => {
@@ -35,9 +36,9 @@ const categoryController = {
         });
       }
 
-      req.body.totalAmount =
-        req.body.totalCount * (req.body.amount + req.body.commition);
+      req.body.totalAmount = req.body.totalCount * req.body.amount;
       req.body.totalCommition = req.body.totalCount * req.body.commition;
+      req.body.total = req.body.totalAmount + req.body.totalCommition;
 
       const newCategory = await prisma.category.create({
         data: {
@@ -47,6 +48,7 @@ const categoryController = {
           totalCount: data.totalCount,
           totalAmount: req.body.totalAmount,
           totalCommition: req.body.totalCommition,
+          total: req.body.total,
           duration: data.duration,
           collectionCycle: data.collectionCycle,
         },
@@ -80,12 +82,16 @@ const categoryController = {
         message: "Category not found",
       });
     }
-    const newAmount = data.amount || categoryExist.amount;
-    const newCommission = data.commition || categoryExist.commition;
-    const totalCount = data.totalCount || categoryExist.totalCount;
-    const newName = data.name || categoryExist.name;
+    var newAmount = data.amount || categoryExist.amount;
+    var newCommission = data.commition || categoryExist.commition;
+    var totalCount = data.totalCount || categoryExist.totalCount;
+    var newName = data.name || categoryExist.name;
 
-    req.body.totalAmount = totalCount * (newAmount + newCommission);
+    if (data.amount || data.commition || data.totalCount) {
+      req.body.totalAmount = data.amount * data.totalCount;
+      req.body.totalCommition = data.commition * data.totalCount;
+      req.body.total = req.body.totalCommition + req.body.totalAmount;
+    }
     // You might want to consider calculating totalAmount based on just commission here
     req.body.totalCommition = totalCount * newCommission;
 
@@ -100,6 +106,7 @@ const categoryController = {
         totalCount: totalCount,
         totalAmount: req.body.totalAmount,
         totalCommition: req.body.totalCommition,
+        total: req.body.total,
         duration: data.duration,
         collectionCycle: data.collectionCycle,
       },
@@ -161,11 +168,16 @@ const categoryController = {
   },
 
   getAllCategories: async (req, res, next) => {
+    const take = req.query.take || 10;
+    const skip = req.query.skip || 0;
+
     try {
       const categories = await prisma.category.findMany({
         include: {
           _count: true,
         },
+        take: +take,
+        skip: +skip,
       }); // Fetch all categories
 
       return res.status(200).json({

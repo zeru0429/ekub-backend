@@ -1,12 +1,5 @@
-import express from "express";
 import { prisma } from "../../config/prisma.js";
 import depositSchema from "./depositSchema.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { STATUS } from "@prisma/client";
-import { SECRET } from "../../config/secrets.js";
-import { z } from "zod";
-import { isAuthUser, isAdmin } from "../../middlewares/auth.js";
 import {
   startOfWeek,
   endOfWeek,
@@ -16,7 +9,7 @@ import {
 } from "date-fns";
 import { startOfMonth, endOfMonth } from "date-fns";
 import { startOfYear, endOfYear, getMonth, addWeeks } from "date-fns";
-import { parseISO, startOfDay, endOfDay } from "date-fns";
+import { startOfDay } from "date-fns";
 
 const depositController = {
   register: async (req, res, next) => {
