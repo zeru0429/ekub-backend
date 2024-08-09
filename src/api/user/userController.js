@@ -174,8 +174,8 @@ const userController = {
 
     try {
       const users = await prisma.users.findMany({
-        skip: skip,
-        take: take,
+        skip: +skip,
+        take: +take,
       });
       return res.status(200).json({
         success: true,
