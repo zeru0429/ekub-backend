@@ -10,6 +10,7 @@ import {
 import { startOfMonth, endOfMonth } from "date-fns";
 import { startOfYear, endOfYear, getMonth, addWeeks } from "date-fns";
 import { startOfDay } from "date-fns";
+import { da, tr } from "date-fns/locale";
 
 const depositController = {
   register: async (req, res, next) => {
@@ -27,6 +28,11 @@ const depositController = {
     try {
       const lot = await prisma.lots.findUnique({
         where: { id: data.lotId },
+        include: {
+          category: true,
+          deposits: true,
+          _count: true,
+        },
       });
 
       if (!lot) {
@@ -35,83 +41,97 @@ const depositController = {
           message: "Lot not found",
         });
       }
-      const categoryId = lot.categoryId;
-      const category = await prisma.category.findUnique({
-        where: { id: categoryId },
+      if (data.commition > lot.category.commition) {
+        return res.status(400).json({
+          success: false,
+          message: `invalid commission. You can only deposit up to ${lot.category.commition}.`,
+        });
+      }
+      if (parseInt(lot.remainingDay) == 0) {
+        return res.status(400).json({
+          success: false,
+          message: `you allredy complted the ekub `,
+        });
+      }
+      // data extract;
+      data.amountRemain = 0;
+      data.commitionRemain = 0;
+      data.isCompleted = false;
+      //check if it is completed
+      if (parseInt(lot.remainingDay) == 1) {
+        data.isCompleted = true;
+      }
+      if (data.amount != lot.category.amount) {
+        data.amountRemain =
+          parseFloat(lot.category.amount) - parseFloat(data.amount);
+      }
+      if (data.commition != lot.category.commition) {
+        data.commitionRemain =
+          parseFloat(lot.category.commition) - parseFloat(data.commition);
+      }
+
+      // loto table attributes
+      req.body.remainingDay = parseInt(lot.remainingDay) - 1;
+      //cp
+      req.body.cumulativePayment =
+        parseInt(lot.cumulativePayment) + data.amount;
+      // ccp
+      req.body.cumulativeCommitionPayment =
+        parseInt(lot.cumulativeCommitionPayment) + data.commition;
+      // ra
+      req.body.remainingAmount = parseInt(
+        lot.category.total -
+          req.body.cumulativeCommitionPayment -
+          req.body.cumulativePayment
+      );
+      console.log({
+        userId: 1,
+        lotId: data.lotId,
+        amount: parseFloat(data.amount),
+        commition: parseFloat(data.commition),
+        count: parseInt(lot.deposits.length) + 1,
+        remainingAmountPerDeposit: parseFloat(data.amountRemain),
+        remainingCommissionPerDeposit: parseFloat(data.commitionRemain),
+        isCompleted: data.isCompleted,
+        remainingDay: req.body.remainingDay,
+        remainingAmount: req.body.remainingAmount,
+        cumulativePayment: req.body.cumulativeCommitionPayment,
+        cumulativeCommitionPayment: req.body.cumulativeCommitionPayment,
       });
 
-      if (!category) {
-        return res.status(404).json({
-          success: false,
-          message: "Category not found",
-        });
-      }
-
-      req.body.remainingAmount =
-        parseFloat(lot.remainingAmount) -
-        (parseFloat(req.body.amount) + parseFloat(req.body.commition));
-
-      req.body.remainingDay = parseInt(lot.remainingDay) - 1;
-      req.body.cumulativePayment =
-        parseFloat(lot.cumulativePayment) +
-        (parseFloat(req.body.amount) + parseFloat(req.body.commition)); // Update cumulative payment
-
-      if (data.amount > category.amount) {
-        return res.status(400).json({
-          success: false,
-          message: `The deposit amount exceeds the amount allowed for one cycle. You can only deposit up to ${category.amount}.`,
-        });
-      }
-
-      if (data.commition > category.commition) {
-        return res.status(400).json({
-          success: false,
-          message: `The commission exceeds the allowed amount for one cycle. You can only deposit up to ${category.commition}.`,
-        });
-      }
-      if (req.body.cumulativePayment > category.totalAmount) {
-        return res.status(400).json({
-          success: false,
-          message: `The cumulative payment exceeds the total allowed amount.. You can only deposit up to ${lot.remainingAmount}.`,
-        });
-      }
-      // const cycleAmount = parseFloat(category.totalAmount) / parseFloat(category.totalCount);
-      req.body.remainingAmountPerDeposit = category.amount - data.amount;
-      req.body.remainingCommissionPerDeposit =
-        category.commition - data.commition;
-      // req.body.remaining = cycleAmount - (parseFloat(req.body.amount) + parseFloat(req.body.commition));
-      req.body.count = category.totalCount - lot.remainingDay + 1;
       const newDeposit = await prisma.deposits.create({
         data: {
+          userId: 1, //req.user.id, //
+          lotId: data.lotId,
           amount: parseFloat(data.amount),
           commition: parseFloat(data.commition),
-          remainingAmountPerDeposit: parseFloat(
-            req.body.remainingAmountPerDeposit
-          ),
-          remainingCommissionPerDeposit: parseFloat(
-            req.body.remainingCommissionPerDeposit
-          ),
-          count: req.body.count,
-          userId: req.user.id,
-          lotId: data.lotId,
+          count: parseInt(lot.deposits.length) + 1,
+          remainingAmountPerDeposit: parseFloat(data.amountRemain),
+          remainingCommissionPerDeposit: parseFloat(data.commitionRemain),
         },
       });
-
       const updatedLot = await prisma.lots.update({
         where: { id: data.lotId },
         data: {
-          remainingAmount: req.body.remainingAmount,
+          isCompleted: data.isCompleted,
           remainingDay: req.body.remainingDay,
-          cumulativePayment: req.body.cumulativePayment,
-          isCompleted: req.body.remainingAmount === 0 ? true : false,
+          remainingAmount: req.body.remainingAmount,
+          cumulativePayment: req.body.cumulativeCommitionPayment,
+          cumulativeCommitionPayment: req.body.cumulativeCommitionPayment,
         },
       });
-
+      const updatedlottery = await prisma.lots.findUnique({
+        where: { id: data.lotId },
+        include: {
+          category: true,
+          deposits: true,
+          _count: true,
+        },
+      });
       return res.status(200).json({
         success: true,
         message: "register deposit",
-        data: newDeposit,
-        updatedLot: updatedLot,
+        data: updatedlottery,
       });
     } catch (error) {
       next(error);
@@ -122,8 +142,11 @@ const depositController = {
     const data = depositSchema.update.parse(req.body);
 
     try {
-      const existingDeposit = await prisma.deposits.findUnique({
+      const existingDeposit = await prisma.deposits.findFirst({
         where: { id: id },
+        include: {
+          _count: true,
+        },
       });
 
       if (!existingDeposit) {
@@ -133,52 +156,60 @@ const depositController = {
         });
       }
 
-      const lot = await prisma.lots.findUnique({
+      const lot = await prisma.lots.findFirst({
         where: { id: existingDeposit.lotId },
+        include: {
+          category: true,
+          deposits: true,
+        },
       });
-
-      if (!lot) {
-        return res.status(404).json({
-          success: false,
-          message: "Lot not found",
-        });
-      }
-
-      const categoryId = lot.categoryId;
-      const category = await prisma.category.findUnique({
-        where: { id: categoryId },
-      });
-
-      if (!category) {
-        return res.status(404).json({
-          success: false,
-          message: "Category not found",
-        });
-      }
-
-      const amountDifference = data.amount - existingDeposit.amount;
-      const commitionDifference = data.commition - existingDeposit.commition;
-
-      req.body.remainingAmount =
-        lot.remainingAmount - amountDifference - commitionDifference;
-      req.body.remainingDay = lot.remainingDay; // No change in remainingDay unless it's specific to the deposit
-      const cumulativePayment =
-        parseInt(lot.cumulativePayment) +
-        parseInt(amountDifference) +
-        parseInt(commitionDifference); // Update cumulative payment
-      if (data.amount > category.amount) {
+      if (data.amount > lot.category.amount) {
         return res.status(400).json({
           success: false,
           message: `The deposit amount exceeds the amount allowed for one cycle. You can only deposit up to ${category.amount}.`,
         });
       }
 
-      if (data.commition > category.commition) {
+      if (data.commition > lot.category.commition) {
         return res.status(400).json({
           success: false,
-          message: `The commission exceeds the allowed amount for one cycle. You can only deposit up to ${category.commition}.`,
+          message: `invalid commission. You can only deposit up to ${lot.category.commition}.`,
         });
       }
+      if (parseInt(lot.remainingDay) == 0) {
+        return res.status(400).json({
+          success: false,
+          message: `you allredy complted the ekub `,
+        });
+      }
+      // data extract;
+      data.amountRemain = 0;
+      data.commitionRemain = 0;
+      //calculate diffrence in deposit and commition
+      const amountDifference = data.amount - existingDeposit.amount;
+      const commitionDifference = data.commition - existingDeposit.commition;
+      //calulating remaining in deposit
+      if (data.amount != lot.category.amount) {
+        data.amountRemain =
+          parseFloat(lot.category.amount) - parseFloat(data.amount);
+      }
+      if (data.commition != lot.category.commition) {
+        data.commitionRemain =
+          parseFloat(lot.category.commition) - parseFloat(data.commition);
+      }
+      // loto table attributes
+      //cp
+      req.body.cumulativePayment =
+        parseInt(lot.cumulativePayment) + parseFloat(amountDifference);
+      // ccp
+      req.body.cumulativeCommitionPayment =
+        parseInt(lot.cumulativeCommitionPayment) +
+        parseFloat(commitionDifference);
+      // ra
+      req.body.remainingAmount =
+        parseInt(lot.category.toatal) -
+        parseInt(req.body.cumulativeCommitionPayment) -
+        parseInt(req.body.cumulativePayment);
 
       if (cumulativePayment > category.totalAmount) {
         return res.status(400).json({
@@ -191,40 +222,37 @@ const depositController = {
         });
       }
 
-      // const cycleAmount = category.totalAmount / category.totalCount;
-      req.body.remainingAmountPerDeposit = category.amount - data.amount;
-      req.body.remainingCommissionPerDeposit =
-        category.commition - data.commition;
-      // req.body.remaining = cycleAmount - (req.body.amount + req.body.commition);
-
       const updatedDeposit = await prisma.deposits.update({
         where: { id: id },
         data: {
-          amount: data.amount,
-          commition: data.commition,
-          remainingAmountPerDeposit: parseFloat(
-            req.body.remainingAmountPerDeposit
-          ),
-          remainingCommissionPerDeposit: parseFloat(
-            req.body.remainingCommissionPerDeposit
-          ),
+          amount: parseFloat(data.amount),
+          commition: parseFloat(data.commition),
+          remainingAmountPerDeposit: parseFloat(data.amountRemain),
+          remainingCommissionPerDeposit: parseFloat(data.commitionRemain),
         },
       });
 
       const updatedLot = await prisma.lots.update({
         where: { id: existingDeposit.lotId },
         data: {
-          remainingAmount: req.body.remainingAmount,
-          cumulativePayment: cumulativePayment, // Save cumulative payment
-          isCompleted: req.body.remainingAmount === 0 ? true : false,
+          cumulativePayment: parseFloat(req.body.cumulativePayment),
+          cumulativeCommitionPayment: parseFloat(
+            req.body.cumulativeCommitionPayment
+          ),
+          remainingAmount: parseFloat(req.body.remainingAmount),
+        },
+      });
+      const updatDeposit = await prisma.deposits.findFirst({
+        where: { id: id },
+        include: {
+          _count: true,
         },
       });
 
       return res.status(200).json({
         success: true,
         message: "update deposit",
-        data: updatedDeposit,
-        updatedLot: updatedLot,
+        data: updatDeposit,
       });
     } catch (error) {
       next(error);

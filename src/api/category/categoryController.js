@@ -8,8 +8,6 @@ const categoryController = {
   register: async (req, res, next) => {
     try {
       const data = req.body;
-      console.log(data);
-
       // Check if any required field is missing
       const requiredFields = [
         "name",
@@ -36,9 +34,23 @@ const categoryController = {
         });
       }
 
-      req.body.totalAmount = req.body.totalCount * req.body.amount;
-      req.body.totalCommition = req.body.totalCount * req.body.commition;
-      req.body.total = req.body.totalAmount + req.body.totalCommition;
+      req.body.totalAmount =
+        parseFloat(req.body.totalCount) * parseFloat(req.body.amount);
+      req.body.totalCommition =
+        parseFloat(req.body.totalCount) * parseFloat(req.body.commition);
+      req.body.total =
+        parseFloat(req.body.totalAmount) + parseFloat(req.body.totalCommition);
+      console.log({
+        name: data.name,
+        amount: data.amount,
+        commition: data.commition,
+        totalCount: data.totalCount,
+        totalAmount: req.body.totalAmount,
+        totalCommition: req.body.totalCommition,
+        total: parseFloat(req.body.total),
+        duration: data.duration,
+        collectionCycle: data.collectionCycle,
+      });
 
       const newCategory = await prisma.category.create({
         data: {

@@ -96,6 +96,7 @@ const lotController = {
       });
     }
   },
+
   getUserInfo: async (req, res, next) => {
     const lotId = parseInt(req.params.id.substring(1), 10);
 

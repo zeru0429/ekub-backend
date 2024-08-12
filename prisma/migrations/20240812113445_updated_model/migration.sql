@@ -25,6 +25,7 @@ CREATE TABLE `Category` (
     `totalCount` INTEGER NOT NULL,
     `totalAmount` DECIMAL(65, 30) NOT NULL,
     `totalCommition` DECIMAL(65, 30) NOT NULL,
+    `toatal` DECIMAL(65, 30) NOT NULL,
     `collectionCycle` VARCHAR(191) NOT NULL,
     `duration` VARCHAR(191) NOT NULL,
 
@@ -41,6 +42,7 @@ CREATE TABLE `Lots` (
     `remainingDay` INTEGER NOT NULL,
     `remainingAmount` DECIMAL(65, 30) NOT NULL,
     `cumulativePayment` DECIMAL(65, 30) NOT NULL DEFAULT 0,
+    `cumulativeCommitionPayment` DECIMAL(65, 30) NOT NULL DEFAULT 0,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

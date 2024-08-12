@@ -39,14 +39,11 @@ const loanController = {
       const winner = await prisma.winners.findFirst({
         where: { lotId: data.lotId },
       });
-      console.log(data.lotId);
-      console.log(winner);
 
       if (winner) {
         return res.status(400).json({
           success: false,
-          message:
-            "You cannot get a loan because you are already registered as a winner for this round",
+          message: "You cannot get a loan you are already win",
         });
       }
       const loans = await prisma.loans.findMany({
