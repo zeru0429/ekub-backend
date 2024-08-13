@@ -6,6 +6,7 @@ import { late } from "zod";
 
 const categoryController = {
   register: async (req, res, next) => {
+    console.log(req.body);
     try {
       const data = req.body;
       // Check if any required field is missing
@@ -75,7 +76,7 @@ const categoryController = {
       console.error(error);
       return res.status(500).json({
         success: false,
-        message: "An error occurred while creating the category",
+        message: `Error: ${error}`,
       });
     }
   },

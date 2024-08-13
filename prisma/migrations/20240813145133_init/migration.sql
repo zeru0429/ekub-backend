@@ -9,9 +9,7 @@ CREATE TABLE `Users` (
     `firstName` VARCHAR(191) NOT NULL,
     `middleName` VARCHAR(191) NOT NULL,
     `lastName` VARCHAR(191) NOT NULL,
-    `activeStatus` ENUM('ACTIVE', 'DEACTIVATED', 'PENDING') NOT NULL,
-
-    UNIQUE INDEX `Users_email_key`(`email`),
+    `activeStatus` ENUM('ACTIVE', 'DEACTIVATED', 'PENDING') NOT NULL,    UNIQUE INDEX `Users_email_key`(`email`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -25,11 +23,9 @@ CREATE TABLE `Category` (
     `totalCount` INTEGER NOT NULL,
     `totalAmount` DECIMAL(65, 30) NOT NULL,
     `totalCommition` DECIMAL(65, 30) NOT NULL,
-    `toatal` DECIMAL(65, 30) NOT NULL,
+    `total` DECIMAL(65, 30) NOT NULL,
     `collectionCycle` VARCHAR(191) NOT NULL,
-    `duration` VARCHAR(191) NOT NULL,
-
-    PRIMARY KEY (`id`)
+    `duration` VARCHAR(191) NOT NULL,    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -42,9 +38,7 @@ CREATE TABLE `Lots` (
     `remainingDay` INTEGER NOT NULL,
     `remainingAmount` DECIMAL(65, 30) NOT NULL,
     `cumulativePayment` DECIMAL(65, 30) NOT NULL DEFAULT 0,
-    `cumulativeCommitionPayment` DECIMAL(65, 30) NOT NULL DEFAULT 0,
-
-    PRIMARY KEY (`id`)
+    `cumulativeCommitionPayment` DECIMAL(65, 30) NOT NULL DEFAULT 0,    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -58,9 +52,7 @@ CREATE TABLE `Profiles` (
     `gender` ENUM('MALE', 'FEMALE') NOT NULL,
     `city` VARCHAR(191) NOT NULL,
     `street` VARCHAR(191) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    UNIQUE INDEX `Profiles_lotId_key`(`lotId`),
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),    UNIQUE INDEX `Profiles_lotId_key`(`lotId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -74,9 +66,7 @@ CREATE TABLE `Deposits` (
     `commition` DECIMAL(65, 30) NOT NULL,
     `remainingAmountPerDeposit` DECIMAL(65, 30) NOT NULL,
     `remainingCommissionPerDeposit` DECIMAL(65, 30) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    PRIMARY KEY (`id`)
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -85,9 +75,7 @@ CREATE TABLE `Loans` (
     `lotId` INTEGER NOT NULL,
     `userId` INTEGER NOT NULL,
     `amount` DECIMAL(65, 30) NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    PRIMARY KEY (`id`)
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -95,9 +83,7 @@ CREATE TABLE `Winners` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `lotId` INTEGER NOT NULL,
     `registeredBy` INTEGER NOT NULL,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    PRIMARY KEY (`id`)
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
@@ -108,9 +94,7 @@ CREATE TABLE `remainingPayement` (
     `depositId` INTEGER NOT NULL,
     `amountPaid` DECIMAL(65, 30) NULL,
     `commissionPaid` DECIMAL(65, 30) NULL,
-    `paymentDate` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-
-    PRIMARY KEY (`id`)
+    `paymentDate` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
