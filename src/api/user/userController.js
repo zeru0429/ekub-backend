@@ -111,7 +111,7 @@ const userController = {
         firstName: user.firstName,
         role: user.role,
       };
-
+      console.log(SECRET);
       // Assuming jwt.sign exists and SECRET is defined
       const token = await jwt.sign(payload, SECRET);
 
